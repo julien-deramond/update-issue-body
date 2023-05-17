@@ -19,7 +19,7 @@ async function run(): Promise<void> {
       issueNumber: Number(core.getInput('issue-number')),
       body: core.getInput('body'),
       editMode: core.getInput('edit-mode'),
-      appendSeparator: core.getInput('append-separator'),
+      appendSeparator: core.getInput('append-separator')
     }
     core.debug(`Inputs: ${inspect(inputs)}`)
 
