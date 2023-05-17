@@ -65,12 +65,10 @@ jobs:
         with:
           issue-number: 1
           body: |
-            Toto
-            - With GitHub **Markdown** :sparkles:
-            - Created by [create-or-update-comment][1]
-
-            [1]: https://github.com/peter-evans/create-or-update-comment
-          edit-mode: replace
+            fdsjfjsdofsdijfds
+          # edit-mode: replace
+          edit-mode: append
+          append-separator: space
 
   package:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
