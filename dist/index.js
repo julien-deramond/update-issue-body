@@ -142,7 +142,7 @@ function appendSeparatorTo(body, separator) {
             return body + '\n';
         case 'space':
             return body + ' ';
-        default: // none
+        default:
             return body;
     }
 }
