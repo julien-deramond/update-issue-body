@@ -19,8 +19,6 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-    outputs:
-      issue-number: ${{ steps.vars.outputs.issue-number }}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -40,13 +38,6 @@ jobs:
         with:
           name: action.yml
           path: action.yml
-      - id: vars
-        run: |
-          if [[ "${{ github.event_name }}" == "pull_request" ]]; then \
-            echo "issue-number=${{ github.event.number }}" >> $GITHUB_OUTPUT; \
-          else \
-            echo "issue-number=1" >> $GITHUB_OUTPUT; \
-          fi
 
   test:
     if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository
@@ -72,7 +63,7 @@ jobs:
         uses: ./
         id: couc
         with:
-          issue-number: ${{ needs.build.outputs.issue-number }}
+          issue-number: 1
           body: |
             Toto
             - With GitHub **Markdown** :sparkles:
