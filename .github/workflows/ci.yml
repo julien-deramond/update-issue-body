@@ -79,7 +79,7 @@ jobs:
             - Created by [create-or-update-comment][1]
 
             [1]: https://github.com/peter-evans/create-or-update-comment
-          edit: replace
+          edit-mode: replace
 
   package:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
