@@ -28,8 +28,7 @@ _This is strongly based on [peter-evans/create-or-update-comment](https://github
     body: |
       **Edit**: Append some new content separated by a space
     edit-mode: append
-    
-
+    append-separator: space
 ```
 
 ### Action inputs
