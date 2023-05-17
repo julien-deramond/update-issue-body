@@ -59,16 +59,31 @@ jobs:
           name: action.yml
           path: .
 
-      - name: Test create comment
+      - name: Test replace body
         uses: ./
-        id: couc
         with:
           issue-number: 1
           body: |
-            fdsjfjsdofsdijfds
-          # edit-mode: replace
+            Entire body replaced by the action
+          edit-mode: replace
+
+      - name: Test append body with space separator
+        uses: ./
+        with:
+          issue-number: 1
+          body: |
+            _Text appended with space separator_
           edit-mode: append
           append-separator: space
+
+      - name: Test append body with newline separator
+        uses: ./
+        with:
+          issue-number: 1
+          body: |
+            **Text appended with newline separator**
+          edit-mode: append
+          append-separator: newline
 
   package:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
