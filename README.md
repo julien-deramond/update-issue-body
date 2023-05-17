@@ -8,11 +8,29 @@ _This is strongly based on [peter-evans/create-or-update-comment](https://github
 
 ###  Replace issue body
 
-TODO
+```yaml
+- name: Update Issue Body
+  uses: julien-deramond/update-issue-body@v0.0.1
+  with:
+    issue-number: ${{ github.event.issue.number }}
+    body: |
+      **Edit**: Some new content
+    edit-mode: replace
+```
 
 ### Append content to issue body
 
-TODO
+```yaml
+- name: Append Issue Body
+  uses: julien-deramond/update-issue-body@v0.0.1
+  with:
+    issue-number: ${{ github.event.issue.number }}
+    body: |
+      **Edit**: Append some new content separated by a space
+    edit-mode: append
+    
+
+```
 
 ### Action inputs
 
