@@ -16,7 +16,7 @@ function appendSeparatorTo(body: string, separator: string): string {
       return body + '\n'
     case 'space':
       return body + ' '
-    default: // none
+    default:
       return body
   }
 }
