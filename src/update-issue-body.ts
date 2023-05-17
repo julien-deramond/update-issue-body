@@ -29,7 +29,7 @@ async function updateBody(
   body: string,
   editMode: string,
   appendSeparator: string
-): Promise<number> {
+): Promise<void> {
   if (body) {
     let issueBody = ''
     if (editMode == 'append') {
@@ -54,7 +54,6 @@ async function updateBody(
     })
     core.info(`Updated issue id '${issueNumber}'.`)
   }
-  return issueNumber
 }
 
 export async function updateIssueBody(
