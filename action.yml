@@ -1,5 +1,5 @@
-name: 'Create or Update Comment'
-description: 'Create or update an issue or pull request comment'
+name: 'Update Issue Body'
+description: 'Update an issue body'
 inputs:
   token:
     description: 'GITHUB_TOKEN or a repo scoped PAT.'
