@@ -51,6 +51,14 @@ _This is heavily based on [peter-evans/create-or-update-comment](https://github.
 You can update issue body in another repository by using a [PAT](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) instead of `GITHUB_TOKEN`.
 The user associated with the PAT must have write access to the repository.
 
+## Sponsors
+
+<p align="center">
+  <a href="https://cdn.jsdelivr.net/gh/julien-deramond/static/sponsors.svg">
+    <img src='https://cdn.jsdelivr.net/gh/julien-deramond/static/sponsors.svg'/>
+  </a>
+</p>
+
 ## License
 
 [MIT](LICENSE)
