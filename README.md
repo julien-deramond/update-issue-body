@@ -13,7 +13,7 @@ _This is heavily based on [peter-evans/create-or-update-comment](https://github.
 
 ```yaml
 - name: Update Issue Body
-  uses: julien-deramond/update-issue-body@v0.0.1
+  uses: julien-deramond/update-issue-body@v1
   with:
     issue-number: ${{ github.event.issue.number }}
     body: |
@@ -25,7 +25,7 @@ _This is heavily based on [peter-evans/create-or-update-comment](https://github.
 
 ```yaml
 - name: Append Issue Body
-  uses: julien-deramond/update-issue-body@v0.0.1
+  uses: julien-deramond/update-issue-body@v1
   with:
     issue-number: ${{ github.event.issue.number }}
     body: |
