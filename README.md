@@ -34,10 +34,10 @@ _This is heavily based on [peter-evans/create-or-update-comment](https://github.
     append-separator: space
 ```
 
-### Preprend content to issue body
+### Prepend content to issue body
 
 ```yaml
-- name: Preprend Issue Body
+- name: Prepend Issue Body
   uses: julien-deramond/update-issue-body@v1
   with:
     issue-number: ${{ github.event.issue.number }}
