@@ -44,7 +44,7 @@ _This is heavily based on [peter-evans/create-or-update-comment](https://github.
     body: |
       **Edit**: Prepend some new content separated by a space
     edit-mode: prepend
-    append-separator: space
+    prepend-separator: space
 ```
 
 ### Action inputs
