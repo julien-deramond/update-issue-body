@@ -12,8 +12,11 @@ inputs:
   body:
     description: 'The issue body.'
   edit-mode:
-    description: 'The mode when updating the issue body, "replace" or "append".'
+    description: 'The mode when updating the issue body, "replace", "append" or "prepend".'
     default: 'append'
+  prepend-separator:
+    description: 'The separator to use when prepending to an existing issue body. (`newline`, `space`, `none`)'
+    default: 'newline'
   append-separator:
     description: 'The separator to use when appending to an existing issue body. (`newline`, `space`, `none`)'
     default: 'newline'

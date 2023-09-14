@@ -19,16 +19,22 @@ async function run(): Promise<void> {
       issueNumber: Number(core.getInput('issue-number')),
       body: core.getInput('body'),
       editMode: core.getInput('edit-mode'),
-      appendSeparator: core.getInput('append-separator')
+      appendSeparator: core.getInput('append-separator'),
+      prependSeparator: core.getInput('prepend-separator')
     }
+
     core.debug(`Inputs: ${inspect(inputs)}`)
 
-    if (!['append', 'replace'].includes(inputs.editMode)) {
+    if (!['append', 'prepend', 'replace'].includes(inputs.editMode)) {
       throw new Error(`Invalid edit-mode '${inputs.editMode}'.`)
     }
 
     if (!['newline', 'space', 'none'].includes(inputs.appendSeparator)) {
       throw new Error(`Invalid append-separator '${inputs.appendSeparator}'.`)
+    }
+
+    if (!['newline', 'space', 'none'].includes(inputs.prependSeparator)) {
+      throw new Error(`Invalid prepend-separator '${inputs.prependSeparator}'.`)
     }
 
     const body = getBody(inputs)

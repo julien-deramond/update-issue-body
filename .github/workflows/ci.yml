@@ -85,6 +85,24 @@ jobs:
           edit-mode: append
           append-separator: newline
 
+      - name: Test prepend body with space separator
+        uses: ./
+        with:
+          issue-number: 1
+          body: |
+            _Text prepended with space separator_
+          edit-mode: prepend
+          prepend-separator: space
+  
+      - name: Test prepend body with newline separator
+        uses: ./
+        with:
+          issue-number: 1
+          body: |
+            **Text prepended with newline separator**
+          edit-mode: prepend
+          prepend-separator: newline
+
   package:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     needs: [test]
