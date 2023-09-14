@@ -60,14 +60,18 @@ function run() {
                 issueNumber: Number(core.getInput('issue-number')),
                 body: core.getInput('body'),
                 editMode: core.getInput('edit-mode'),
-                appendSeparator: core.getInput('append-separator')
+                appendSeparator: core.getInput('append-separator'),
+                prependSeparator: core.getInput('prepend-separator')
             };
             core.debug(`Inputs: ${(0, util_1.inspect)(inputs)}`);
-            if (!['append', 'replace'].includes(inputs.editMode)) {
+            if (!['append', 'prepend', 'replace'].includes(inputs.editMode)) {
                 throw new Error(`Invalid edit-mode '${inputs.editMode}'.`);
             }
             if (!['newline', 'space', 'none'].includes(inputs.appendSeparator)) {
                 throw new Error(`Invalid append-separator '${inputs.appendSeparator}'.`);
+            }
+            if (!['newline', 'space', 'none'].includes(inputs.prependSeparator)) {
+                throw new Error(`Invalid prepend-separator '${inputs.prependSeparator}'.`);
             }
             const body = getBody(inputs);
             if (inputs.issueNumber) {
@@ -146,7 +150,17 @@ function appendSeparatorTo(body, separator) {
             return body;
     }
 }
-function updateBody(octokit, owner, repo, issueNumber, body, editMode, appendSeparator) {
+function prependSeparatorTo(body, separator) {
+    switch (separator) {
+        case 'newline':
+            return '\n' + body;
+        case 'space':
+            return ' ' + body;
+        default: // none
+            return body;
+    }
+}
+function updateBody(octokit, owner, repo, issueNumber, body, editMode, appendSeparator, prependSeparator) {
     return __awaiter(this, void 0, void 0, function* () {
         if (body) {
             let issueBody = '';
@@ -159,7 +173,21 @@ function updateBody(octokit, owner, repo, issueNumber, body, editMode, appendSep
                 });
                 issueBody = appendSeparatorTo(issue.body ? issue.body : '', appendSeparator);
             }
-            issueBody = issueBody + body;
+            else if (editMode == 'prepend') {
+                // Get the issue body
+                const { data: issue } = yield octokit.rest.issues.get({
+                    owner: owner,
+                    repo: repo,
+                    issue_number: issueNumber
+                });
+                issueBody = prependSeparatorTo(issue.body ? issue.body : '', prependSeparator);
+            }
+            if (editMode == 'prepend') {
+                issueBody = body + issueBody;
+            }
+            else {
+                issueBody = issueBody + body;
+            }
             core.debug(`Issue body: ${issueBody}`);
             yield octokit.rest.issues.update({
                 owner: owner,
@@ -175,7 +203,7 @@ function updateIssueBody(inputs, body) {
     return __awaiter(this, void 0, void 0, function* () {
         const [owner, repo] = inputs.repository.split('/');
         const octokit = github.getOctokit(inputs.token);
-        yield updateBody(octokit, owner, repo, inputs.issueNumber, body, inputs.editMode, inputs.appendSeparator);
+        yield updateBody(octokit, owner, repo, inputs.issueNumber, body, inputs.editMode, inputs.appendSeparator, inputs.prependSeparator);
     });
 }
 exports.updateIssueBody = updateIssueBody;

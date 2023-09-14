@@ -8,6 +8,7 @@ export interface Inputs {
   body: string
   editMode: string
   appendSeparator: string
+  prependSeparator: string
 }
 
 function appendSeparatorTo(body: string, separator: string): string {
@@ -21,6 +22,17 @@ function appendSeparatorTo(body: string, separator: string): string {
   }
 }
 
+function prependSeparatorTo(body: string, separator: string): string {
+  switch (separator) {
+    case 'newline':
+      return '\n' + body
+    case 'space':
+      return ' ' + body
+    default: // none
+      return body
+  }
+}
+
 async function updateBody(
   octokit,
   owner: string,
@@ -28,7 +40,8 @@ async function updateBody(
   issueNumber: number,
   body: string,
   editMode: string,
-  appendSeparator: string
+  appendSeparator: string,
+  prependSeparator: string
 ): Promise<void> {
   if (body) {
     let issueBody = ''
@@ -44,7 +57,25 @@ async function updateBody(
         appendSeparator
       )
     }
-    issueBody = issueBody + body
+    else if (editMode == 'prepend') {
+      // Get the issue body
+      const {data: issue} = await octokit.rest.issues.get({
+        owner: owner,
+        repo: repo,
+        issue_number: issueNumber
+      })
+      issueBody = prependSeparatorTo(
+        issue.body ? issue.body : '',
+        prependSeparator
+      )
+    }
+
+    if (editMode == 'prepend') {
+      issueBody = body + issueBody
+    } else {
+      issueBody = issueBody + body
+    }
+
     core.debug(`Issue body: ${issueBody}`)
     await octokit.rest.issues.update({
       owner: owner,
@@ -71,6 +102,7 @@ export async function updateIssueBody(
     inputs.issueNumber,
     body,
     inputs.editMode,
-    inputs.appendSeparator
+    inputs.appendSeparator,
+    inputs.prependSeparator
   )
 }

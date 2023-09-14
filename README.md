@@ -34,6 +34,19 @@ _This is heavily based on [peter-evans/create-or-update-comment](https://github.
     append-separator: space
 ```
 
+### Preprend content to issue body
+
+```yaml
+- name: Preprend Issue Body
+  uses: julien-deramond/update-issue-body@v1
+  with:
+    issue-number: ${{ github.event.issue.number }}
+    body: |
+      **Edit**: Prepend some new content separated by a space
+    edit-mode: prepend
+    append-separator: space
+```
+
 ### Action inputs
 
 | Name | Description | Default |
@@ -42,8 +55,9 @@ _This is heavily based on [peter-evans/create-or-update-comment](https://github.
 | `repository` | The full name of the repository in which to update the issue body. | Current repository |
 | `issue-number` | The number of the issue to be updated. | |
 | `body` | The issue body. | |
-| `edit-mode` | The mode when updating the issue body, `replace` or `append`. | `append` |
+| `edit-mode` | The mode when updating the issue body, `replace`, `append` or `prepend`. | `append` |
 | `append-separator` | The separator to use when appending to an existing issue body. (`newline`, `space`, `none`) | `newline` |
+| `prepend-separator` | The separator to use when prepending to an existing issue body. (`newline`, `space`, `none`) | `newline` |
 
 
 ### Accessing issues in other repositories
