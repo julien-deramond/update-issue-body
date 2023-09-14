@@ -56,8 +56,7 @@ async function updateBody(
         issue.body ? issue.body : '',
         appendSeparator
       )
-    }
-    else if (editMode == 'prepend') {
+    } else if (editMode == 'prepend') {
       // Get the issue body
       const {data: issue} = await octokit.rest.issues.get({
         owner: owner,
