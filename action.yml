@@ -21,7 +21,7 @@ inputs:
     description: 'The separator to use when appending to an existing issue body. (`newline`, `space`, `none`)'
     default: 'newline'
 runs:
-  using: 'node16'
+  using: 'node24'
   main: 'dist/index.js'
 branding:
   icon: 'message-square'
