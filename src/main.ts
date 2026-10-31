@@ -1,7 +1,7 @@
 import * as core from '@actions/core'
-import {Inputs, updateIssueBody} from './update-issue-body'
+import {Inputs, updateIssueBody} from './update-issue-body.js'
 import {inspect} from 'util'
-import * as utils from './utils'
+import * as utils from './utils.js'
 
 function getBody(inputs: Inputs) {
   if (inputs.body) {
