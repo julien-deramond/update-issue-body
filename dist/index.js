@@ -37791,7 +37791,7 @@ async function run() {
         else {
             throw new Error("Missing 'issue-number'.");
         }
-        updateIssueBody(inputs, body);
+        await updateIssueBody(inputs, body);
     }
     catch (error) {
         core.debug((0,external_util_.inspect)(error));

@@ -47,7 +47,7 @@ async function run(): Promise<void> {
       throw new Error("Missing 'issue-number'.")
     }
 
-    updateIssueBody(inputs, body)
+    await updateIssueBody(inputs, body)
   } catch (error) {
     core.debug(inspect(error))
     const errMsg = utils.getErrorMessage(error)
